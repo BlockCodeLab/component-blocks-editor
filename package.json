@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "preact": "^10.18.1",
-    "scratch-blocks": "^0.2.0-prerelease.20231013132110",
+    "scratch-blocks": "^1.1.128",
     "@blockcode/core": "workspace:*",
     "@blockcode/ui": "workspace:*"
   }
