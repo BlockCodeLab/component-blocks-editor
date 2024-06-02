@@ -111,9 +111,6 @@ export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCr
     if (ScratchBlocks.ScratchMsgs.currentLocale_ !== locale) {
       ScratchBlocks.ScratchMsgs.setLocale(locale);
     }
-    Object.entries(messages).forEach(([key, value]) => {
-      ScratchBlocks.Msg[key] = value;
-    });
     if (ref.workspace) {
       updateToolbox();
       setTimeout(() => loadXmlToWorkspace(), 50);
@@ -136,6 +133,10 @@ export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCr
       ref.workspace.clearUndo();
     }
   }, [selectedIndex]);
+
+  Object.entries(messages).forEach(([key, value]) => {
+    ScratchBlocks.Msg[key] = value;
+  });
 
   useEffect(() => {
     if (ref.current) {
