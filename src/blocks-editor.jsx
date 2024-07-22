@@ -54,10 +54,10 @@ const makeXml = (toolbox) => `<xml style="display: none">\n${toolbox}\n</xml>`;
 export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCreated, onChange }) {
   const ref = useRef(null);
   const { language } = useLocale();
-  const { fileList, selectedIndex } = useEditor();
+  const { fileList, selectedFileId } = useEditor();
 
   const loadXmlToWorkspace = () => {
-    const xml = fileList[selectedIndex].xml;
+    const xml = fileList.find((file) => file.id === selectedFileId).xml;
     const xmlDom = ScratchBlocks.Xml.textToDom(xml || '');
 
     // remove global variables
@@ -132,7 +132,7 @@ export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCr
       loadXmlToWorkspace();
       ref.workspace.clearUndo();
     }
-  }, [selectedIndex]);
+  }, [selectedFileId]);
 
   Object.entries(messages).forEach(([key, value]) => {
     ScratchBlocks.Msg[key] = value;
