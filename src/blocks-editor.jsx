@@ -5,6 +5,10 @@ import makeToolboxXML from './lib/make-toolbox-xml';
 import unifyLocale from './lib/unify-locale';
 import styles from './blocks-editor.module.css';
 
+import './blocks/data';
+import './blocks/events';
+import './blocks/procedures';
+
 const BLOCKS_DEFAULT_SCALE = 0.7;
 
 const BLOCKS_DEFAULT_OPTIONS = {

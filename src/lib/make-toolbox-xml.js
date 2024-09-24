@@ -1,6 +1,4 @@
 import ScratchBlocks from '../scratch-blocks';
-import '../blocks/data';
-import '../blocks/events';
 
 export const blockSeparator = '<sep gap="36"/>';
 
@@ -290,7 +288,7 @@ export default function makeToolboxXML(categoriesXML = []) {
   const sensingXML = moveCategory('sensing') || sensing();
   const operatorsXML = moveCategory('operators') || operators();
   const variablesXML = moveCategory('data') || variables();
-  // const myBlocksXML = moveCategory('procedures') || myBlocks();
+  const myBlocksXML = moveCategory('procedures') || myBlocks();
 
   const everything = [
     motionXML,
@@ -301,7 +299,7 @@ export default function makeToolboxXML(categoriesXML = []) {
     sensingXML,
     operatorsXML,
     variablesXML,
-    // myBlocksXML,
+    myBlocksXML,
   ];
 
   for (const extensionCategory of categoriesXML) {
