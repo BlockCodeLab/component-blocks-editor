@@ -55,12 +55,14 @@ const supportedEvents = new Set([
 
 const makeXml = (toolbox) => `<xml style="display: none">\n${toolbox}\n</xml>`;
 
-export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCreated, onChange }) {
+export function BlocksEditor({ toolbox, globalVariables, messages, extensionsLoaded, onWorkspaceCreated, onChange }) {
   const ref = useRef(null);
   const { language } = useLocale();
   const { fileList, selectedFileId } = useEditor();
 
   const loadXmlToWorkspace = () => {
+    if (!extensionsLoaded) return;
+
     const xml = fileList.find((file) => file.id === selectedFileId).xml;
     const xmlDom = ScratchBlocks.Xml.textToDom(xml || '');
 
@@ -101,13 +103,10 @@ export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCr
     });
   };
 
-  const getWorkspaceXml = () => {
-    const xmlDom = ScratchBlocks.Xml.workspaceToDom(ref.workspace);
-    return ScratchBlocks.Xml.domToText(xmlDom);
-  };
-
   const handleChange = () => {
-    onChange(getWorkspaceXml(), ref.workspace);
+    const xmlDom = ScratchBlocks.Xml.workspaceToDom(ref.workspace);
+    const xml = ScratchBlocks.Xml.domToText(xmlDom);
+    onChange(xml, ref.workspace);
   };
 
   useEffect(() => {
@@ -117,7 +116,7 @@ export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCr
     }
     if (ref.workspace) {
       updateToolbox();
-      setTimeout(() => loadXmlToWorkspace(), 50);
+      setTimeout(loadXmlToWorkspace, 50);
     }
   }, [language]);
 
@@ -136,7 +135,7 @@ export function BlocksEditor({ toolbox, globalVariables, messages, onWorkspaceCr
       loadXmlToWorkspace();
       ref.workspace.clearUndo();
     }
-  }, [selectedFileId]);
+  }, [selectedFileId, extensionsLoaded]);
 
   Object.entries(messages).forEach(([key, value]) => {
     ScratchBlocks.Msg[key] = value;
