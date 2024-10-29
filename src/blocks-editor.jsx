@@ -63,8 +63,8 @@ export function BlocksEditor({ toolbox, globalVariables, messages, extensionsLoa
   const loadXmlToWorkspace = () => {
     if (!extensionsLoaded) return;
 
-    const xml = fileList.find((file) => file.id === selectedFileId).xml;
-    const xmlDom = ScratchBlocks.Xml.textToDom(xml || '');
+    const target = fileList.find((file) => file.id === selectedFileId);
+    const xmlDom = ScratchBlocks.Xml.textToDom(target?.xml || '');
 
     // remove global variables
     if (globalVariables) {
