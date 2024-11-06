@@ -18,6 +18,7 @@
 .editor-workspace :global(.blocklyFlyout) {
   border-left: 1px solid var(--ui-black-transparent) !important;
   border-right: 1px solid var(--ui-black-transparent) !important;
+  backdrop-filter: blur(3px);
 }
 
 .editor-workspace :global(.blocklyFlyout .blocklyFlyoutBackground) {
