@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'preact/hooks';
-import { useLocale, useEditor } from '@blockcode/core';
+import { useLocale, useLayout, useEditor } from '@blockcode/core';
 import ScratchBlocks from './scratch-blocks';
 import makeToolboxXML from './lib/make-toolbox-xml';
 import unifyLocale from './lib/unify-locale';
@@ -58,6 +58,7 @@ const makeXml = (toolbox) => `<xml style="display: none">\n${toolbox}\n</xml>`;
 export function BlocksEditor({ toolbox, globalVariables, messages, extensionsLoaded, onWorkspaceCreated, onChange }) {
   const ref = useRef(null);
   const { language } = useLocale();
+  const { selectedTabIndex } = useLayout();
   const { fileList, selectedFileId } = useEditor();
 
   const loadXmlToWorkspace = () => {
@@ -136,6 +137,13 @@ export function BlocksEditor({ toolbox, globalVariables, messages, extensionsLoa
       ref.workspace.clearUndo();
     }
   }, [selectedFileId, extensionsLoaded]);
+
+  useEffect(() => {
+    if (ref.workspace) {
+      updateToolbox();
+      loadXmlToWorkspace();
+    }
+  }, [selectedTabIndex]);
 
   Object.entries(messages).forEach(([key, value]) => {
     ScratchBlocks.Msg[key] = value;
