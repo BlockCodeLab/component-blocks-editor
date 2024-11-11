@@ -116,7 +116,6 @@ export function BlocksEditor({ toolbox, globalVariables, messages, extensionsLoa
       ScratchBlocks.ScratchMsgs.setLocale(locale);
     }
     if (ref.workspace) {
-      updateToolbox();
       setTimeout(loadXmlToWorkspace, 50);
     }
   }, [language]);
