@@ -39,6 +39,24 @@ const BLOCKS_DEFAULT_OPTIONS = {
   sounds: false,
 };
 
+if (DEVELOPMENT) {
+  ScratchBlocks.Blocks['sensing_debug'] = {
+    init() {
+      this.jsonInit({
+        message0: 'DEBUG %1',
+        args0: [
+          {
+            type: 'input_value',
+            name: 'VALUE',
+          },
+        ],
+        category: ScratchBlocks.Categories.sensing,
+        extensions: ['colours_sensing', 'shape_statement'],
+      });
+    },
+  };
+}
+
 const supportedEvents = new Set([
   ScratchBlocks.Events.BLOCK_CHANGE,
   ScratchBlocks.Events.BLOCK_CREATE,
@@ -65,7 +83,9 @@ export function BlocksEditor({ toolbox, globalVariables, messages, extensionsLoa
     if (!extensionsLoaded) return;
 
     const target = fileList.find((file) => file.id === selectedFileId);
-    const xmlDom = ScratchBlocks.Xml.textToDom(target?.xml || '');
+    const xmlDom = ScratchBlocks.Xml.textToDom(
+      target?.xml || '"<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables></xml>"',
+    );
 
     // remove global variables
     if (globalVariables) {

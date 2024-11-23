@@ -41,7 +41,7 @@
   padding: 0 !important;
   margin: 0 !important;
   max-width: 260px !important;
-  overflow: hidden !important;
+  /* overflow: hidden !important; */
   box-shadow: 0 var(--space) var(--space) 0 var(--ui-black-transparent) !important;
   min-width: 130px !important;
   box-shadow: 0 0 0.5rem hsla(0, 0%, 0%, 0.25) !important;

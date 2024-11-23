@@ -63,6 +63,19 @@ const control = () => `
 
 const sensing = () => `
   <category name="%{BKY_CATEGORY_SENSING}" id="sensing" colour="#4CBFE6" secondaryColour="#2E8EB8">
+    ${
+      DEVELOPMENT
+        ? `
+          <block type="sensing_debug">
+            <value name="VALUE">
+              <shadow type="text">
+                <field name="TEXT">debug</field>
+              </shadow>
+            </value>
+          </block>
+          ${blockSeparator}`
+        : ''
+    }
     <block id="timer" type="sensing_timer"/>
     <block type="sensing_resettimer"/>
     ${categorySeparator}

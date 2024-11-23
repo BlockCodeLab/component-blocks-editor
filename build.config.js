@@ -20,6 +20,9 @@ export default {
       to: 'assets/blocks-media/',
     }),
   ],
+  define: {
+    DEVELOPMENT: JSON.stringify(Bun.env.BUN_ENV !== 'production'),
+  },
   external: [
     'preact',
     'preact/hooks',
